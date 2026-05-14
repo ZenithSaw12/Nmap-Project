@@ -90,3 +90,18 @@ named scan_results.txt for later review or reporting
 
 > <img src="images/4sheets.png" alt="Findings in Sheets" width="70%">
 
+10.71.250.126: The host is active and exposing four specific ports. Port 22 is running OpenSSH for secure remote management, while Port 80 provides a web interface, likely for a router or administrative console. Additionally, Port 9929 is active for Nping network testing, and Port 31337 is open, which is historically associated with the "Elite" backdoor or custom hacking tools. This combination of standard management ports and a high-risk "Elite" port suggests a system being used for technical testing or one that requires immediate security investigation.
+
+### Investigate and Interpret
+
+The IP address 10.71.250.126 identifies an active host on the network with a mix of expected and highly unusual services. While Port 22 (SSH) and Port 80 (HTTP) are standard for remote management and web interfaces, the presence of Port 9929 (Nping) and Port 31337 (Elite) stands out. The "Elite" port is particularly noteworthy as it is a classic indicator of a backdoor or unauthorized tool, which is not typically expected in a standard configuration. Fortunately, no legacy protocols like FTP or Telnet were detected, which reduces the risk of clear-text credential theft. However, the discovery of the "Elite" port highlights the need for further investigation to ensure the system hasn't been compromised or isn't running unauthorized scripts.
+
+## Deeper Dive
+
+# Lessons Learned
+
+# Contact & Links
+
+- LinkedIn: www.linkedin.com/in/zenithsaw
+
+- GitHub: https://github.com/ZenithSaw12
