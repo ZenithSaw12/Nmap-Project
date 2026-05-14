@@ -34,8 +34,21 @@ I will be scanning for active devices on scanme.nmap.org instead of my current I
 
 `sn` is a ping scan. The `n` stands for no port scan. This command tells Nmap to only perform host discovery. It sends a ping (ICMP) to the target to see if it’s "alive" but stops right there.
 
-Output
+Output:
 
-> <img src="images/1ping.png" alt="Ping Scan" width="50%">
+> <img src="images/2ping.png" alt="Ping Scan" width="70%">
 
+### Port Scan and Service Detection
 
+Now we will run a deeper scan to identify open ports and services.
+
+> Powershell
+> ```powershell
+> nmap -sV scanme.nmap.org
+> ```
+
+`sV` is service/version detection: it probes open ports to identify exactly which software is running and its specific version number.
+
+Output:
+
+> <img src="images/3version.png" alt="Version Detection" width="70%">
