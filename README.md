@@ -85,3 +85,8 @@ Saving Results:
 
 oN scan_results.txt (Nmap) → Outputs the scan results in normal text format to a file
 named scan_results.txt for later review or reporting
+
+### Document Findings
+
+> <img src="images/4sheets.png" alt="Findings in Sheets" width="70%">
+
