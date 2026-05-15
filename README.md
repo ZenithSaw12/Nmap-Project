@@ -98,6 +98,16 @@ The IP address 10.71.250.126 identifies an active host on the network with a mix
 
 ## Deeper Dive
 
+### Operating System Detection
+
+> Powershell
+> ```powershell
+> nmap -O scanme.nmap.org -oN task1_os_detection.txt
+> ```
+
+- Here we use the -O option to identify the operating system in use
+- The -oN option saves formatted output to a file
+
 # Lessons Learned
 
 # Contact & Links
