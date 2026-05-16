@@ -157,6 +157,37 @@ Script output:
 
 > <img src="images/6task2.png" alt="TCP Scan output" width="70%">
 
+- Here we notice that the scan took 3.90 seconds, which is faster than the version scan.
+- Also notice that the results of the SYN scan matches that of the version scan.
+
+#### Key Findings
+
+| Port | State | Service | Comments |
+| :--- | :--- | :--- | :--- |
+| 22 | open | ssh | Secure Shell protocol is open for remote administrative command-line access. |
+| 25 | filtered | smtp | Simple Mail Transfer Protocol is filtered, indicating a firewall is blocking or protecting mail services. |
+| 80 | open | http | Standard web service port is open, serving the target's public webpage. |
+| 113 | filtered | ident | Identification protocol is filtered by a security device or firewall. |
+| 139 | filtered | netbios-ssn | NetBIOS session service is filtered, preventing exposure of legacy network sharing protocols. |
+| 445 | filtered | microsoft-ds | Microsoft Directory Services (SMB) is filtered, protecting against network-level file sharing exploits. |
+| 9929 | open | nping-echo | Active port used explicitly for Nmap’s Nping network connectivity and echo benchmarking. |
+| 31337 | open | Elite | Non-standard port historically tied to trojans or backdoors; active on this host for testing identification. |
+
+### UDP Scan
+
+User Datagram Protocol scan finds which services are running on a target machine.
+
+> Powershell
+> ```powershell
+> nmap -sU scanme.nmap.org -oN task3_udp_scan.txt
+> ```
+
+- `-sU` performs a UDP scan.
+
+Script Output:
+
+> <img src="images/7udp.png" alt="UDP Scan output" width="70%">
+
 # Lessons Learned
 
 # Contact & Links
