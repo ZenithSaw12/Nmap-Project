@@ -189,7 +189,7 @@ Script Output:
 > <img src="images/7udp.png" alt="UDP Scan output" width="70%">
 
 - UDP are slower due to being a connectionless protocol, meaning devices often don't reply. This causes Nmap to retry multiple times
-- Notice that the scan took
+- Notice that the scan took 1022.01 seconds (around 17 minutes)
 
 `task3_udp_scan.txt`
 
@@ -197,14 +197,44 @@ Script Output:
 
 ### Findings
 
+A total of 995 closed UDP ports returned an "ICMP port unreachable" message, indicating they are clearly closed. There are 4 ports marked as open|filtered; because Nmap received no response, it cannot determine if they are actually open or being blocked by a firewall. Meanwhile, 1 port is confirmed completely open (123/udp), which is running NTP (Network Time Protocol) to handle system clock synchronization. Combined, this accounts for all 5 anomalous ports flagged during the 1,022-second network sweep.
+
 Extracted UDP Ports:
 
+| Port | State | Service | Notes / Comments |
+| :--- | :--- | :--- | :--- |
+| 123/udp | open | ntp | Network Time Protocol is active and explicitly confirmed open; standard service used for network clock synchronization. |
+| 67/udp | open\|filtered | dhcps | DHCP server port; unresponsive to standard probes, indicating it is either active or protected by an upstream firewall. |
+| 68/udp | open\|filtered | dhcpc | DHCP client port; returned no response, leaving its exact state open or filtered by security rules. |
+| 517/udp | open\|filtered | talk | Legacy chat protocol port; marked as open or filtered due to packet silence from the host. |
+| 518/udp | open\|filtered | ntalk | Extended legacy talk protocol port; state is ambiguous as no diagnostic packets were returned. |
+| 995 ports | closed | — | Returned explicit ICMP port-unreachable messages, confirming these network avenues are securely shut down. |
 
 #### Interpretation
 
-This is why the scan shows:
+**Why is UDP scanning slow?**
 
--
+UDP doesn’t establish connections like TCP does. When a UDP packet is sent:
+
+- If the port is closed, the host responds with an ICMP port-unreachable message, which is easy to detect.
+- If the port is open, the host often gives no response, so Nmap must retry multiple times and wait out long timeouts.
+- If the port is filtered, a firewall drops packets silently, which also results in no response.
+
+This is why the scan took 1022.01 seconds (over 17 minutes) and shows:
+
+- 4 open|filtered ports
+- Only 1 confirmed open port
+
+**Why is Port 123/UDP open?**
+
+Port 123/udp is designated for NTP (Network Time Protocol). Public servers, infrastructure hosts, and active network nodes use this service to automatically synchronize their local system clocks with highly accurate atomic time sources across the internet.
+
+**Why no DNS (53/udp) or standard router management ports?**
+
+Unlike a typical home router that handles local web management and DNS caching for local devices, scanme.nmap.org is a public-facing server meant for network testing. Based on the scan, it appears to:
+
+- Filter or close local network management protocols like DHCP and standard DNS.
+- Keep time synchronization (NTP) accessible while leaving legacy communication systems like talk/ntalk (517/518) completely silent or filtered behind a security firewall.
 
 # Lessons Learned
 
