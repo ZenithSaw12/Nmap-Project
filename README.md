@@ -105,8 +105,57 @@ The IP address 10.71.250.126 identifies an active host on the network with a mix
 > nmap -O scanme.nmap.org -oN task1_os_detection.txt
 > ```
 
-- Here we use the -O option to identify the operating system in use
-- The -oN option saves formatted output to a file
+- Here we use the `-O` option to identify the operating system in use
+- The `-oN` option saves formatted output to a file
+
+> task1_os_detection.txt
+>
+> <img src="images/5task1.png" alt="Output file" width="70%">
+
+#### OS Fingerprint Section 
+
+> Powershell
+> ```powershell
+> Device type: general purpose|router
+> Running: Linux 5.X, MikroTik RouterOS 7.X
+> OS CPE: cpe:/o:linux:linux_kernel:5 cpe:/o:mikrotik:routeros:7 cpe:/o:linux:linux_kernel:5.6.3
+> OS details: Linux 5.0 - 5.14, MikroTik RouterOS 7.2 - 7.5 (Linux 5.6.3)
+> Network Distance: 17 hops
+> ```
+
+Here Nmap offered OS guesses within specified ranges
+
+#### Record Key Info
+
+| Field | Value |
+| :--- | :--- |
+| **Target IP** | 45.33.32.156 (scanme.nmap.org) |
+| **Detected OS** | Linux 5.X, MikroTik RouterOS 7.X |
+| **OS Accuracy** | Not provided |
+| **Device type** | general purpose\|router |
+| **MAC Address** | Not provided (Target is on a remote network) |
+| **Network Distance** | 17 hops |
+| **Suspicious Mismatch?** | No. The detected Linux 5.X kernel matches the expected configuration for a public web and testing server like scanme.nmap.org. |
+
+**Verification Analysis:**
+
+A follow-up verification is not required as the initial operating system detection scan successfully mapped the open ports. The presence of standard Linux-centric services—specifically SSH (Port 22) and Nping-echo (Port 9929)—is entirely consistent with Nmap's OS fingerprint identifying the target as a general-purpose Linux 5.X environment. No structural discrepancies or unexpected mismatches were detected between the active services and the host operating system.
+
+### TCP SYN Scan
+
+This is to quickly find open ports without establishing a full network connection
+
+> Powershell
+> ```powershell
+> nmap -sS scanme.nmap.org -oN task2_syn_scan.txt
+> ```
+
+- `-sS` is for the TCP scan. It is stealthy and fast.
+- `oN` saves the output to a standard text file
+
+Script output:
+
+> <img src="images/6task2.png" alt="TCP Scan output" width="70%">
 
 # Lessons Learned
 
