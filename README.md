@@ -47,7 +47,7 @@ Now we will run a deeper scan to identify open ports and services.
 > nmap -sV scanme.nmap.org
 > ```
 
-`sV` is service/version detection: it probes open ports to identify exactly which software is running and its specific version number.
+`-sV` is service/version detection: it probes open ports to identify exactly which software is running and its specific version number.
 
 Output:
 
@@ -62,14 +62,14 @@ Open ports:
 
 Nmap reports: "Not shown: 996 closed tcp ports (reset)." This indicates that only 4 ports are open out of the 1000 scanned.
 
-Services:
+**Services:**
 
 - Port 22: Used for Secure Shell (SSH), the industry-standard protocol for secure remote access to a server.
 - Port 80: The standard port for unencrypted web traffic. It is used by web browsers to request and load traditional webpages.
 - Port 9929: This is a non-standard port often associated with Nmap’s benchmarking or testing services.
 - Port 31337: Famously known in the security community as the "Elite" (31337 = ELEET) port. It was historically used by various hacking groups and trojans as a default backdoor port.
 
-Version Information:
+**Version Information:**
 
 - 22/tcp: OpenSSH — Commonly used for secure remote command-line access; the specific version (e.g., OpenSSH 8.2) identifies the software build and its associated security patches.
 - 80/tcp: Hypertext Transfer Protocol (HTTP) — Frequently identified as Apache httpd, nginx, or a router's web management interface.
@@ -83,7 +83,7 @@ Saving Results:
 > nmap -sV -oN scan_results.txt scanme.nmap.org
 > ```
 
-oN scan_results.txt (Nmap) → Outputs the scan results in normal text format to a file
+`-oN` scan_results.txt (Nmap) → Outputs the scan results in normal text format to a file
 named scan_results.txt for later review or reporting
 
 ### Document Findings
@@ -187,6 +187,24 @@ User Datagram Protocol scan finds which services are running on a target machine
 Script Output:
 
 > <img src="images/7udp.png" alt="UDP Scan output" width="70%">
+
+- UDP are slower due to being a connectionless protocol, meaning devices often don't reply. This causes Nmap to retry multiple times
+- Notice that the scan took
+
+`task3_udp_scan.txt`
+
+> <img src="images/8task3.png" alt="task3 file output" width="70%">
+
+### Findings
+
+Extracted UDP Ports:
+
+
+#### Interpretation
+
+This is why the scan shows:
+
+-
 
 # Lessons Learned
 
